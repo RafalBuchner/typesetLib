@@ -1,5 +1,5 @@
-from typesetLib.abstract.basic import ProofBasicObject
+from typesetLib.abstract.basic import LayoutBasicObject
 
 
-class AbstractGrid(ProofBasicObject):
+class AbstractGrid(LayoutBasicObject):
 	NotImplemented

@@ -8,9 +8,19 @@ class ProofBasicObject(object):
 	def getUserData(self, key):
 		return self.userData[key]
 
-class LayoutBasicObject(ProofBasicObject):
-	def __init__(self, index, parent=None):
+class TextFlowBasicObject(ProofBasicObject)
+	def __init__(self, index):
 		self.index = index
+
+	def indexUP(self):
+		self.index += 1
+
+	def indexDOWN(self):
+		NotImplemented
+
+class LayoutBasicObject(TextFlowBasicObject):
+	def __init__(self, index, parent=None):
+		super().__init__(index)
 		self.parent = parent
 		self.children = []
 
@@ -22,11 +32,7 @@ class LayoutBasicObject(ProofBasicObject):
 	def addChild(self, obj):
 		obj.setParent(self)
 
-	def indexUP(self):
-		self.index += 1
 
-	def indexDOWN(self):
-		NotImplemented
 
 
 		
