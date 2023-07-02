@@ -1,5 +1,5 @@
-from typesetLib.abstract.basic import ProofBasicObject
+from typesetLib.abstract.basic import TextFlowBasicObject
 
 
-class AbstractTextBox(ProofBasicObject):
+class AbstractTextBox(TextFlowBasicObject):
 	NotImplemented
