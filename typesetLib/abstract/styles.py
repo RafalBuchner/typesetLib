@@ -1,7 +1,7 @@
 from typesetLib.abstract.basic import ProofBasicObject
 
 
-class AbstractStyle(ProofBasicObject):
+class Style(ProofBasicObject):
     def __init__(
         self,
         font=None,
@@ -73,16 +73,16 @@ class AbstractStyle(ProofBasicObject):
 
 
 
-class AbstractParagraphStyle(AbstractStyle):
+class ParagraphStyle(Style):
     def __init__(self, **kwargs):
-        super(AbstractParagraphStyle, self).__init__(**kwargs)
+        super(ParagraphStyle, self).__init__(**kwargs)
         # print(self.font)
 
 
-class AbstractCharacterStyle(AbstractStyle):
+class CharacterStyle(Style):
     def __init__(self, **kwargs):
-        super(AbstractCharacterStyle, self).__init__(**kwargs)
+        super(CharacterStyle, self).__init__(**kwargs)
 
 
 if __name__ == "__main__":
-    style = AbstractParagraphStyle(font="mój foncik")
+    style = ParagraphStyle(font="mój foncik")

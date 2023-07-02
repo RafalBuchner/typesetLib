@@ -1,5 +1,5 @@
 from typesetLib.abstract.basic import ProofBasicObject
 
 
-class AbstractStory(ProofBasicObject):
+class Story(ProofBasicObject):
 	NotImplemented

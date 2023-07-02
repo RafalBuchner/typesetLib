@@ -1,5 +1,5 @@
 from typesetLib.abstract.basic import LayoutBasicObject
 
 
-class AbstractGrid(LayoutBasicObject):
+class Grid(LayoutBasicObject):
 	NotImplemented
