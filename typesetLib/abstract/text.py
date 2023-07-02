@@ -8,27 +8,37 @@ class AbstractText(ProofBasicObject):
         self._text = txt
 
         # needed for character styling
-        self.textSegments = []
         self.setText(txt)
+
+    @property
+    def textSegments(self):
+        if self.paragraphs is None:
+            return []
+        textSegments = []
+
+        return [seg for par in self.paragraphs for seg in par.getTextSegments()]
 
     @property
     def paragraphs(self):
         if self.getText is None:
             return None
+        return self.__paragraphs
+
+    @paragraphs.setter
+    def paragraphs(self, value):
+        self.__paragraphs = value
 
     def setText(self, txt):
         self.paragraphs = None
         self._text = txt
 
-        # needed for character styling
-        self.textSegments = []
-
         if txt is None:
             return
 
         self.paragraphs = []
+
         for idx, parTxt in enumerate(self._text.split("\n")):
-            par = AbstractParagraph(parTxt, idx)
+            par = AbstractParagraph(self, parTxt, idx)
             self.paragraphs.append(par)
 
     def getText(self):
@@ -48,69 +58,119 @@ class AbstractText(ProofBasicObject):
         par = self.getParagraphByIndex[paragraphIndex]
         par.setParagraphStyle(paragraphStyle)
 
-    def setCharacterStyle(paragraphIndex, startIdx, charRange, characterStyle):
-        seg = AbstractTextSegment(paragraphIndex, startIndex,
-                          charRange, characterStyle)
-        self.textSegments.append(seg)
+    def setCharacterStyle(self, paragraphIndex, startIndex, charRange, characterStyle):
+        segment = self.paragraphs[paragraphIndex].addTextSegment(startIndex, charRange, characterStyle)
+        return segment
 
-    def getTextSegmentStr(self, textSegment):
-        par = self.getParagraphByIndex[textSegment.paragraphIndex]
+    def getTextAndStyleMaps(self):
 
-        txt = par.txt[textSegment.startIndex,
-                      textSegment.endIndex]
-        return txt
-
-    def getSegmentsPerParagraphDict(self):
-        segmentsPerParagraph = {}
+        textMap = []
+        styleMap = []
         for par in self.paragraphs:
-            segmentsPerParagraph[par] = []
-            for textSegment in self.textSegments:
-                if textSegment.paragraphIndex == par.index:
-                    segmentsPerParagraph[par].append(textSegment)
-        return segmentsPerParagraph
+            parTextMap, parStyleMap = par.getTextAndStyleMaps()
+            textMap += parTextMap
+            styleMap += parStyleMap
 
-    def getStyleMap(self):
-        segmentsPerParagraph = self.getSegmentsPerParagraphDict()
-        # styleMap = []
-        # textMap = []
-        for par, segments in self.getSegmentsPerParagraphDict().items():
-            for seg in segments:
-                segText = self.getTextSegmentStr(seg)
+        return textMap, styleMap
 
-
-        # TODO:
-        # this will be the method that returns two lists,
-        # (not dicts, because they can exclude txt segments as keys)
-        # which will contain:
-        # styleMap - character and paragraph styles in the same order as:
-        # textMap – chunks of text strings, that are divided based on style map
 
 class AbstractParagraph(ProofBasicObject):
-    def __init__(self, txt, index, paragraphStyle=None):
-        self.txt = txt
+    def __init__(self, textObj, txtStr, index, paragraphStyle=None):
+        self._textSegments = []
+        self.parent = textObj
+        self.txtStr = txtStr
         self.index = index
         self.paragraphStyle = paragraphStyle
 
     def setParagraphStyle(self, paragraphStyle):
         self.paragraphStyle = paragraphStyle
 
+    def addTextSegment(self, startIndex,
+                       charRange, characterStyle=None):
+        # TODO:
+        #  check if new text segment is not overlapping with some
+        #  other segment. If it does, then override overlapped chunk.
+        #  It can be hard to implement, but possible.
+
+        segment = AbstractTextSegment(self, startIndex,
+                                      charRange, characterStyle)
+
+        self._textSegments.append(segment)
+        return segment
+
+    def getTextSegments(self):
+        self._textSegments.sort(key=lambda x: x.startIndex)
+        return self._textSegments
+
+    def getTextAndStyleMaps(self):
+        # TODO:
+        #  for now this method will assume, that the text segments are not
+        #  overlapping!!! otherwise it will create a mess.
+        segs = self.getTextSegments()
+        styleMap = []
+        indices = []
+        for idx, seg in enumerate(segs):
+            # indices for creating textmap
+            indices.append(seg.startIndex)
+            indices.append(seg.endIndex)
+
+            # creating stylemap
+
+            # if characterStyle starts with the beggining paragraph,
+            # don't add default style on the beggining,
+            # otherwise:
+            if idx == 0 and seg.startIndex != 0:
+                styleMap = [self.paragraphStyle]
+
+            characterStyle = self.paragraphStyle
+            if seg.characterStyle is not None:
+                characterStyle = seg.characterStyle
+            styleMap.append(characterStyle)
+
+            # if next segment starts right after current one,
+            # continue and don't add paragraph style to stylemap
+            if idx + 1 < len(segs):
+                nextSeg = segs[idx + 1]
+                if seg.endIndex == nextSeg.startIndex:
+                    continue
+            styleMap.append(self.paragraphStyle)
+
+        if len(segs) > 0:
+
+            textMap = [self.txtStr[:segs[0].startIndex]]
+            for i, j in zip(indices, indices[1:] + [None]):
+
+                # take care of empty strings, that
+                # appear between neighbouring
+                # text segments:
+                if self.txtStr[i:j] != "":
+                    textMap.append(self.txtStr[i:j])
+        else:
+            styleMap = [self.paragraphStyle]
+            textMap = [self.txtStr]
+
+        return textMap, styleMap
+
 
 class AbstractTextSegment(ProofBasicObject):
     """
     TextSegment
     represents chunk of text. You can think of it as of a selection of text.
-    It is needed to make Character Styling happen
+    It is needed to make Character Styling happen.
 
     parameters
-    paragraphIndex – int - self explanatory.
-    startIndex – int - index of a character in parent-paragraph's text that starts the segment
-    charRange - int - count of letters, that are included in the text segment
+    :param paragraphObj:
+    :param paragraphIndex:  – int - self explanatory.
+    :param startIndex:  – int - index of a character in parent-paragraph's text that starts the segment
+    :param charRange:  - int - count of letters, that are included in the text segment
+    :param characterStyle:
 
     """
 
-    def __init__(self, paragraphIndex, startIndex,
+    def __init__(self, paragraphObj, startIndex,
                  charRange, characterStyle=None):
-        self.paragraphIndex = paragraphIndex
+        self.parent = paragraphObj
+        self.paragraphIndex = self.parent.index
         self.startIndex = startIndex
         self.charRange = charRange
         self.characterStyle = characterStyle
@@ -118,4 +178,9 @@ class AbstractTextSegment(ProofBasicObject):
     @property
     def endIndex(self):
         return self.startIndex + self.charRange
-    
+
+    @property
+    def txtStr(self):
+        txt = self.parent.txtStr[self.startIndex:
+                                 self.endIndex]
+        return txt
