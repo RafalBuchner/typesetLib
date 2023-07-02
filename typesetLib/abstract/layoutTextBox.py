@@ -1,5 +1,5 @@
-from typesetLib.abstract.basic import TextFlowBasicObject
+from typesetLib.abstract.basic import GraphicBasicObject
 
 
-class LayoutTextBox(TextFlowBasicObject):
+class LayoutTextBox(GraphicBasicObject):
 	NotImplemented
