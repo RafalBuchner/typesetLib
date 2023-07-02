@@ -152,19 +152,16 @@ class AbstractParagraph(ProofBasicObject):
         return textMap, styleMap
 
 
-class AbstractTextSegment(ProofBasicObject):
+class TextSegment(ProofBasicObject):
     """
-    TextSegment
-    represents chunk of text. You can think of it as of a selection of text.
-    It is needed to make Character Styling happen.
+    Represents a chunk of text, which can be thought of as a selection of text.
+    It is needed to enable character styling.
 
-    parameters
-    :param paragraphObj:
-    :param paragraphIndex:  – int - self explanatory.
-    :param startIndex:  – int - index of a character in parent-paragraph's text that starts the segment
-    :param charRange:  - int - count of letters, that are included in the text segment
-    :param characterStyle:
-
+    Parameters:
+    - paragraphObj (Paragraph): The parent paragraph object.
+    - startIndex (int): The index of the character in the parent paragraph's text that starts the segment.
+    - charRange (int): The number of letters included in the text segment.
+    - characterStyle (CharacterStyle): The style applied to the text segment.
     """
 
     def __init__(self, paragraphObj, startIndex,
