@@ -8,7 +8,7 @@ class ProofBasicObject(object):
 	def getUserData(self, key):
 		return self.userData[key]
 
-class TextFlowBasicObject(ProofBasicObject)
+class TextFlowBasicObject(ProofBasicObject):
 	def __init__(self, index):
 		self.index = index
 
@@ -25,7 +25,7 @@ class LayoutBasicObject(TextFlowBasicObject):
 		self.children = []
 
 	def setParent(self, obj):
-		if obj not is None:
+		if not obj is None:
 			obj.children.append(self)
 		self.parent = obj
 

@@ -8,9 +8,9 @@ article = open("article.txt", "r").read()
 
 class AbstractObjectsTest(unittest.TestCase):
     def test_text(self):
-        from typesetLib.abstract.text import AbstractText
+        from typesetLib.abstract.text import TextObj
         from typesetLib.abstract.styles import AbstractCharacterStyle
-        txt = AbstractText()
+        txt = TextObj()
         self.assertIsNone(txt.getText())
         self.assertIsNone(txt.paragraphs)
 

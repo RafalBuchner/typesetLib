@@ -1,7 +1,7 @@
 from typesetLib.abstract.basic import ProofBasicObject
 
 
-class AbstractText(ProofBasicObject):
+class TextObj(ProofBasicObject):
     def __init__(self, txt=None):
         super().__init__()
         self.paragraphs = None
