@@ -75,14 +75,14 @@ class AbstractStyle(ProofBasicObject):
 
 class AbstractParagraphStyle(AbstractStyle):
     def __init__(self, **kwargs):
-        super(ParagraphStyle, self).__init__(**kwargs)
+        super(AbstractParagraphStyle, self).__init__(**kwargs)
         # print(self.font)
 
 
 class AbstractCharacterStyle(AbstractStyle):
     def __init__(self, **kwargs):
-        super(CharacterStyle, self).__init__(**kwargs)
+        super(AbstractCharacterStyle, self).__init__(**kwargs)
 
 
 if __name__ == "__main__":
-    style = ParagraphStyle(font="mój foncik")
+    style = AbstractParagraphStyle(font="mój foncik")
