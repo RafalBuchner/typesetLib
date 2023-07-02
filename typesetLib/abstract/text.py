@@ -2,7 +2,13 @@ from typesetLib.abstract.basic import ProofBasicObject
 
 
 class TextObj(ProofBasicObject):
-    def __init__(self, txt=None):
+    """
+    Represents text that runs in the Story object.
+
+    Parameters:
+    - txt (str): Text of the TextObj.
+    """
+    def __init__(self, txt:str=None):
         super().__init__()
         self.paragraphs = None
         self._text = txt
@@ -14,8 +20,6 @@ class TextObj(ProofBasicObject):
     def textSegments(self):
         if self.paragraphs is None:
             return []
-        textSegments = []
-
         return [seg for par in self.paragraphs for seg in par.getTextSegments()]
 
     @property
@@ -75,6 +79,15 @@ class TextObj(ProofBasicObject):
 
 
 class Paragraph(ProofBasicObject):
+    """
+    Represents paragraph, as a part of TextObj.
+
+    Parameters:
+    - textObj (Paragraph): The parent TextObj object.
+    - txtStr (str): String that belongs to the paragraph. Slice of text defined by TextObj (TextObj.getText())
+    - index (int): The order number of Paragraph. Determined by TextObj.
+    - paragraphStyle (ParagraphStyle): The style applied to the paragraph.
+    """
     def __init__(self, textObj, txtStr, index, paragraphStyle=None):
         self._textSegments = []
         self.parent = textObj
@@ -154,7 +167,7 @@ class Paragraph(ProofBasicObject):
 
 class TextSegment(ProofBasicObject):
     """
-    Represents a chunk of text, which can be thought of as a selection of text.
+    Represents the smallest chunk of text, which can be thought of as a selection of text.
     It is needed to enable character styling.
 
     Parameters:
