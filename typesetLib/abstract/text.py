@@ -38,7 +38,7 @@ class TextObj(ProofBasicObject):
         self.paragraphs = []
 
         for idx, parTxt in enumerate(self._text.split("\n")):
-            par = AbstractParagraph(self, parTxt, idx)
+            par = Paragraph(self, parTxt, idx)
             self.paragraphs.append(par)
 
     def getText(self):
@@ -74,7 +74,7 @@ class TextObj(ProofBasicObject):
         return textMap, styleMap
 
 
-class AbstractParagraph(ProofBasicObject):
+class Paragraph(ProofBasicObject):
     def __init__(self, textObj, txtStr, index, paragraphStyle=None):
         self._textSegments = []
         self.parent = textObj
@@ -92,7 +92,7 @@ class AbstractParagraph(ProofBasicObject):
         #  other segment. If it does, then override overlapped chunk.
         #  It can be hard to implement, but possible.
 
-        segment = AbstractTextSegment(self, startIndex,
+        segment = TextSegment(self, startIndex,
                                       charRange, characterStyle)
 
         self._textSegments.append(segment)
