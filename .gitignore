@@ -3,6 +3,9 @@
 .AppleDouble
 .LSOverride
 
+# dict created by IDE
+.idea
+
 # Icon must end with two \r
 Icon
 
