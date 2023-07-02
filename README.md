@@ -1,4 +1,3 @@
-# ProofLib
+# typesetLib
 
 ## TODO:
-- [ ] abstract.text.Text.getStyleMap
