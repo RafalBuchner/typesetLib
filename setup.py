@@ -12,7 +12,7 @@ with open("libraryData.json", "r") as f:
         description="This tool allows typeset simple layouts using really simple object system.",
         author="Rafał Buchner",
         author_email="rafal.buchner@gmail.com",
-        url="https://github.com/RafalBuchner/quickProof/",
+        url="https://github.com/RafalBuchner/typesetLib/",
         packages=find_packages(),    
         install_requires=libData["requirements"],
         dependency_links=libData["dependency_links"]
