@@ -56,8 +56,8 @@ class AbstractText(ProofBasicObject):
     def getTextSegmentStr(self, textSegment):
         par = self.getParagraphByIndex[textSegment.paragraphIndex]
 
-        txt = par.txt[textSegment.index,
-                      textSegment.index + textSegment.charRange]
+        txt = par.txt[textSegment.startIndex,
+                      textSegment.endIndex]
         return txt
 
     def getSegmentsPerParagraphDict(self):
@@ -74,7 +74,8 @@ class AbstractText(ProofBasicObject):
         # styleMap = []
         # textMap = []
         for par, segments in self.getSegmentsPerParagraphDict().items():
-            pass
+            for seg in segments:
+                segText = self.getTextSegmentStr(seg)
 
 
         # TODO:
@@ -116,5 +117,5 @@ class AbstractTextSegment(ProofBasicObject):
 
     @property
     def endIndex(self):
-        return self.charRange-self.startIndex
+        return self.startIndex + self.charRange
     
