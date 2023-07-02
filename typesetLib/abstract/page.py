@@ -2,8 +2,8 @@ from typesetLib.abstract.basic import LayoutBasicObject
 
 
 class Page(LayoutBasicObject):
-	def __int__(self, index, startPgNumber=0):
-		super().__int__(index)
+	def __int__(self, index, size, startPgNumber=1):
+		super().__int__(index, size)
 		self.startPgNumber = startPgNumber
 
 	@property
