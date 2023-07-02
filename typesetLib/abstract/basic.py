@@ -18,7 +18,26 @@ class TextFlowBasicObject(ProofBasicObject):
 	def indexDOWN(self):
 		NotImplemented
 
-class LayoutBasicObject(TextFlowBasicObject):
+class GraphicBasicObject(TextFlowBasicObject):
+	def __init__(self, index, size, position=None):
+		super().__init__(index)
+		self.setSize(size)
+		if position is not None:
+			self.setPosition(position)
+
+	def setSize(self, size):
+		self.width, self.height = size
+
+	def getSize(self):
+		return self.width, self.height
+
+	def setPosition(self, position):
+		self.x, self.y = position
+
+	def getPosition(self):
+		return self.x, self.y
+
+class LayoutBasicObject(GraphicBasicObject):
 	def __init__(self, index, parent=None):
 		super().__init__(index)
 		self.parent = parent
