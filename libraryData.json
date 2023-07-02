@@ -1,0 +1,10 @@
+{   
+    "typesetLibVersion": "0.0.1",
+    "requirements": [
+        "fontTools",
+        "drawBot"
+    ],
+    "dependency_links": [
+        "git+https://github.com/typemytype/drawbot#egg=drawBot-3.130"
+    ]
+}
