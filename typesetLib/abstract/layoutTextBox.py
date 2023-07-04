@@ -1,16 +1,28 @@
-from typesetLib.abstract.basic import GraphicBasicObject
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from typesetLib.abstract.story import Story
+
+from typesetLib.abstract.basic import LayoutBasicObject
+from typesetLib.abstract.page import Page
 
 
-class LayoutTextBox(GraphicBasicObject):
+
+class LayoutTextBox(LayoutBasicObject):
 	"""
 	- story (Story)
 	"""
-	NotImplemented
+	def __init__(self, position: tuple[float], size: tuple[float], story: Story=None):
+		super().__init__(size, index=None, position=position)
+		if story != None:
+			self.assignToStory(story)
 
-	def assignToStory(self, story):
+	def assignToStory(self, story: Story):
 		self.story = story
 		idx = len(self.story.textBoxes) - 1
 		self.setIndex(idx)
+
+		self.story.addTextBox(self)
 
 	@property
 	def nextTextBox(self):
@@ -33,6 +45,18 @@ class LayoutTextBox(GraphicBasicObject):
 			return None
 
 		return self.story.textBoxes[prevIndex]
+
+	def getParentPage(self):
+		iterationLimit = 50
+		parentPage = None
+		currentObj = self
+		for i in range(iterationLimit):
+			currentObj = currentObj.parent
+			if isinstance(currentObj, Page):
+				parentPage = currentObj
+				break
+		return parentPage
+
 
 
 
