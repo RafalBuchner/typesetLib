@@ -9,14 +9,17 @@ class ProofBasicObject(object):
 		return self.userData[key]
 
 class TextFlowBasicObject(ProofBasicObject):
-	def __init__(self, index):
+	def __init__(self, index=None):
+		self.setIndex(index)
+
+	def setIndex(self, index):
 		self.index = index
 
-	def indexUP(self):
-		self.index += 1
-
-	def indexDOWN(self):
-		NotImplemented
+	# def indexUP(self):
+	# 	self.index += 1
+	#
+	# def indexDOWN(self):
+	# 	NotImplemented
 
 class GraphicBasicObject(TextFlowBasicObject):
 	def __init__(self, index, size, position=None):
