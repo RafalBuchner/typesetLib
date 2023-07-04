@@ -22,7 +22,7 @@ class TextFlowBasicObject(ProofBasicObject):
 	# 	NotImplemented
 
 class GraphicBasicObject(TextFlowBasicObject):
-	def __init__(self, index, size, position=None):
+	def __init__(self, size, index, position=None):
 		super().__init__(index)
 		self.setSize(size)
 		if position is not None:
@@ -41,17 +41,20 @@ class GraphicBasicObject(TextFlowBasicObject):
 		return self.x, self.y
 
 class LayoutBasicObject(GraphicBasicObject):
-	def __init__(self, index, parent=None):
-		super().__init__(index)
+	def __init__(self, size, index, parent=None, position=None):
+		super().__init__(size, index, position)
 		self.parent = parent
-		self.children = []
+		self.children = {}
 
 	def setParent(self, obj):
 		if not obj is None:
-			obj.children.append(self)
+			if self.__class__.__name__ not in obj.children.keys():
+				obj.children[self.__class__.__name__] = []
+			obj.children[self.__class__.__name__].append(self)
 		self.parent = obj
 
 	def addChild(self, obj):
+		#print(dir(obj))
 		obj.setParent(self)
 
 
