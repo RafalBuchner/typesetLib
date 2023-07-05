@@ -78,6 +78,21 @@ class AbstractObjectsTest(unittest.TestCase):
 
         self.assertEqual(len(page.children[TextFrame.__name__]), 3)
 
+    def test_basicDrawbot(self):
+        from typesetLib.basic import BasicDrawbotObject
+
+        db_obj = BasicDrawbotObject()
+        db_obj.setCanvasSize((1000,1000))
+
+        # position only
+        db_x, db_y = db_obj.translateOriginOfPosition((0,50))
+        self.assertEqual(db_y, 950)
+        # position + size
+        db_x, db_y, db_w, db_h = db_obj.translateOriginOfPosition((0, 50, 0, 70))
+        self.assertEqual(db_y, 880)
+
+
+
 
 if __name__ == "__main__":
     unittest.main()

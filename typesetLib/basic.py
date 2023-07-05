@@ -1,3 +1,5 @@
+import drawBot as db
+
 class BasicProofObject(object):
     def __init__(self):
         self.userData = {}
@@ -59,8 +61,27 @@ class BasicLayoutGraphicObject(BasicGraphicObject):
 
 
 class BasicDrawbotObject:
-    def translateOrigin(self):
-        NotImplemented
+    canvasSize = None # make sure that this is a good idea to make it a class attr
+
+    def setCanvasSize(self, size):
+        self.canvasSize = size
+
+    def translateOriginOfPosition(self, posSize):
+        if self.canvasSize is None:
+            height = db.height()
+        else:
+            height = self.canvasSize[1]
+
+        if len(posSize) == 4:
+            x, y, w, h = posSize
+            y = height - y - h
+            return x, y, w, h
+
+        if len(posSize) == 2:
+            x, y = posSize
+            y = height - y
+            return x, y
+
 
     def draw(self):
         NotImplemented
