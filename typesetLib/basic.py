@@ -55,3 +55,12 @@ class BasicLayoutGraphicObject(BasicGraphicObject):
 
     def addChild(self, obj):
         obj.setParent(self)
+
+
+
+class BasicDrawbotObject:
+    def translateOrigin(self):
+        NotImplemented
+
+    def draw(self):
+        NotImplemented
