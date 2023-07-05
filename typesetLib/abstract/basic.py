@@ -45,8 +45,8 @@ class GraphicBasicObject(TextFlowBasicObject):
 		NotImplemented
 
 class LayoutBasicObject(GraphicBasicObject):
-	def __init__(self, size, index, parent=None, position=None):
-		super().__init__(size, index, position)
+	def __init__(self, size, index, parent=None, position=None, verticalAlignment="top"):
+		super().__init__(size, index, position, verticalAlignment)
 		self.parent = parent
 		self.children = {}
 

@@ -13,7 +13,7 @@ class LayoutTextBox(LayoutBasicObject):
 	- story (Story)
 	"""
 	def __init__(self, position: tuple[float], size: tuple[float], story: Story=None, verticalAlignment: str="top"):
-		super().__init__(size, index=None, position=position, verticalAlignment)
+		super().__init__(size, index=None, position=position, verticalAlignment=verticalAlignment)
 		if story != None:
 			self.assignToStory(story)
 
