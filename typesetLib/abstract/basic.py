@@ -16,13 +16,6 @@ class BasicTextFlowObject(BasicProofObject):
     def setIndex(self, index):
         self.index = index
 
-# def indexUP(self):
-# 	self.index += 1
-#
-# def indexDOWN(self):
-# 	NotImplemented
-
-
 class BasicGraphicObject(BasicTextFlowObject):
     def __init__(self, size, index, position=None, verticalAlignment="top"):
         super().__init__(index)
