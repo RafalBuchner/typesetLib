@@ -4,6 +4,9 @@
 .LSOverride
 playground.py
 
+# drawbot tests
+__drawbot_output__
+
 # dict created by IDE
 .idea
 
