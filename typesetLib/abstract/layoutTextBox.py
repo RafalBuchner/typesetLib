@@ -13,10 +13,9 @@ class LayoutTextBox(LayoutBasicObject):
 	- story (Story)
 	"""
 	def __init__(self, position: tuple[float], size: tuple[float], story: Story=None, verticalAlignment: str="top"):
-		super().__init__(size, index=None, position=position)
+		super().__init__(size, index=None, position=position, verticalAlignment)
 		if story != None:
 			self.assignToStory(story)
-		self.setVerticalAlignment(verticalAlignment)
 
 	def assignToStory(self, story: Story):
 		self.story = story
@@ -58,8 +57,6 @@ class LayoutTextBox(LayoutBasicObject):
 				break
 		return parentPage
 
-	def setVerticalAlignment(self, verticalAlignment):
-		NotImplemented
 
 
 

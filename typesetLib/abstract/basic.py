@@ -22,11 +22,12 @@ class TextFlowBasicObject(ProofBasicObject):
 	# 	NotImplemented
 
 class GraphicBasicObject(TextFlowBasicObject):
-	def __init__(self, size, index, position=None):
+	def __init__(self, size, index, position=None, verticalAlignment="top"):
 		super().__init__(index)
 		self.setSize(size)
 		if position is not None:
 			self.setPosition(position)
+		self.setVerticalAlignment(verticalAlignment)
 
 	def setSize(self, size):
 		self.width, self.height = size
@@ -39,6 +40,9 @@ class GraphicBasicObject(TextFlowBasicObject):
 
 	def getPosition(self):
 		return self.x, self.y
+
+	def setVerticalAlignment(self, verticalAlignment):
+		NotImplemented
 
 class LayoutBasicObject(GraphicBasicObject):
 	def __init__(self, size, index, parent=None, position=None):
