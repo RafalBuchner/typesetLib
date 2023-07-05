@@ -1,7 +1,7 @@
-from typesetLib.abstract.basic import ProofBasicObject
+from typesetLib.abstract.basic import BasicProofObject
 
 
-class Style(ProofBasicObject):
+class Style(BasicProofObject):
     def __init__(
         self,
         font=None,

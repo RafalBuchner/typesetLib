@@ -2,14 +2,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typesetLib.abstract.text import TextObj
-    from typesetLib.abstract.layoutTextBox import LayoutTextBox
+    from typesetLib.abstract.textFrame import TextFrame
 
-from typesetLib.abstract.basic import ProofBasicObject
-
-
+from typesetLib.abstract.basic import BasicProofObject
 
 
-class Story(ProofBasicObject):
+
+
+class Story(BasicProofObject):
 	def __init__(self, textObj: TextObj):
 		self.textObj = textObj
 		self.textBoxes = []
@@ -17,7 +17,7 @@ class Story(ProofBasicObject):
 		self.textReminds: TextObj
 
 
-	def addTextBox(self, layoutTextBox: LayoutTextBox):
+	def addTextBox(self, layoutTextBox: TextFrame):
 		self.textBoxes.append(layoutTextBox)
 
 

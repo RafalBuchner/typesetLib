@@ -60,7 +60,7 @@ class AbstractObjectsTest(unittest.TestCase):
         from typesetLib.abstract.text import TextObj
         from typesetLib.abstract.story import Story
         from typesetLib.abstract.page import Page
-        from typesetLib.abstract.layoutTextBox import LayoutTextBox
+        from typesetLib.abstract.textFrame import TextFrame
 
         txt = TextObj()
         txt.setText(article)
@@ -68,15 +68,15 @@ class AbstractObjectsTest(unittest.TestCase):
 
         page = Page((500, 1000))
 
-        textBoxObj1 = LayoutTextBox((0,10), (10,20), story)
-        textBoxObj2 = LayoutTextBox((49,23), (40,50), story)
-        textBoxObj3 = LayoutTextBox((3,11), (80,70), story)
+        textBoxObj1 = TextFrame((0, 10), (10, 20), story)
+        textBoxObj2 = TextFrame((49, 23), (40, 50), story)
+        textBoxObj3 = TextFrame((3, 11), (80, 70), story)
         self.assertEqual(len(story.textBoxes), 3)
 
         for textBoxObj in story.textBoxes:
             page.addChild(textBoxObj)
 
-        self.assertEqual(len(page.children[LayoutTextBox.__name__]), 3)
+        self.assertEqual(len(page.children[TextFrame.__name__]), 3)
 
 
 if __name__ == "__main__":

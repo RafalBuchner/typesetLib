@@ -3,12 +3,12 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typesetLib.abstract.story import Story
 
-from typesetLib.abstract.basic import LayoutBasicObject
+from typesetLib.abstract.basic import BasicLayoutGraphicObject
 from typesetLib.abstract.page import Page
 
 
 
-class LayoutTextBox(LayoutBasicObject):
+class TextFrame(BasicLayoutGraphicObject):
 	"""
 	- story (Story)
 	"""

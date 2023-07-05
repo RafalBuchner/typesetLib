@@ -1,7 +1,7 @@
-from typesetLib.abstract.basic import LayoutBasicObject
+from typesetLib.abstract.basic import BasicLayoutGraphicObject
 
 
-class Page(LayoutBasicObject):
+class Page(BasicLayoutGraphicObject):
 	def __init__(self, size, index=0, startPgNumber=1):
 		super().__init__(size, index)
 		self.setStartingPgNumber(startPgNumber)

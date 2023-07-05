@@ -1,4 +1,4 @@
-class ProofBasicObject(object):
+class BasicProofObject(object):
 	def __init__(self):
 		self.userData = {}
 
@@ -8,7 +8,7 @@ class ProofBasicObject(object):
 	def getUserData(self, key):
 		return self.userData[key]
 
-class TextFlowBasicObject(ProofBasicObject):
+class BasicTextFlowObject(BasicProofObject):
 	def __init__(self, index=None):
 		self.setIndex(index)
 
@@ -21,7 +21,7 @@ class TextFlowBasicObject(ProofBasicObject):
 	# def indexDOWN(self):
 	# 	NotImplemented
 
-class GraphicBasicObject(TextFlowBasicObject):
+class BasicGraphicObject(BasicTextFlowObject):
 	def __init__(self, size, index, position=None, verticalAlignment="top"):
 		super().__init__(index)
 		self.setSize(size)
@@ -44,7 +44,7 @@ class GraphicBasicObject(TextFlowBasicObject):
 	def setVerticalAlignment(self, verticalAlignment):
 		NotImplemented
 
-class LayoutBasicObject(GraphicBasicObject):
+class BasicLayoutGraphicObject(BasicGraphicObject):
 	def __init__(self, size, index, parent=None, position=None, verticalAlignment="top"):
 		super().__init__(size, index, position, verticalAlignment)
 		self.parent = parent

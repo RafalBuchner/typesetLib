@@ -1,7 +1,7 @@
-from typesetLib.abstract.basic import ProofBasicObject
+from typesetLib.abstract.basic import BasicProofObject
 
 
-class TextObj(ProofBasicObject):
+class TextObj(BasicProofObject):
     """
     Represents text that runs in the Story object.
 
@@ -78,7 +78,7 @@ class TextObj(ProofBasicObject):
         return textMap, styleMap
 
 
-class Paragraph(ProofBasicObject):
+class Paragraph(BasicProofObject):
     """
     Represents paragraph, as a part of TextObj.
 
@@ -165,7 +165,7 @@ class Paragraph(ProofBasicObject):
         return textMap, styleMap
 
 
-class TextSegment(ProofBasicObject):
+class TextSegment(BasicProofObject):
     """
     Represents the smallest chunk of text, which can be thought of as a selection of text.
     It is needed to enable character styling.

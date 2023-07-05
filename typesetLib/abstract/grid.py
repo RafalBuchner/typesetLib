@@ -1,5 +1,5 @@
-from typesetLib.abstract.basic import LayoutBasicObject
+from typesetLib.abstract.basic import BasicLayoutGraphicObject
 
 
-class Grid(LayoutBasicObject):
+class Grid(BasicLayoutGraphicObject):
 	NotImplemented
