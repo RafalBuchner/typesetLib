@@ -53,14 +53,6 @@ class Grid(BasicLayoutGraphicObject):
         return self._originPos
 
     def getAreaPosSize(self, colCellIndex, rowCellIndex, horCellNum, verCellNum):
-        # cellWidth, cellHeight = self.cellSize
-        #
-        # x, y = self._originPos
-        # x += colCellIndex * cellWidth + colCellIndex * self.colGutter
-        # y += rowCellIndex * cellHeight + rowCellIndex * self.rowGutter
-        #
-        # width = horCellNum * cellWidth + self.colGutter * (horCellNum - 1)
-        # height = verCellNum * cellHeight + self.rowGutter * (verCellNum - 1)
         x, y = self.getCellPosition(colCellIndex, rowCellIndex)
         width, height = self.getAreaSize(horCellNum, verCellNum)
 
