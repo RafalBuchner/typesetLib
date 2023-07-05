@@ -54,5 +54,4 @@ class BasicLayoutGraphicObject(BasicGraphicObject):
         self.parent = obj
 
     def addChild(self, obj):
-        # print(dir(obj))
         obj.setParent(self)
