@@ -92,7 +92,8 @@ class Grid(BasicLayoutGraphicObject):
 def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCellNum: int,
                    verCellNum: int, colGutter: float, rowGutter: float) -> Grid:
     x, y, w, h = parentGrid.getAreaPosSize(colCellIndex, rowCellIndex, horCellNum, verCellNum)
-    return Grid(
+
+    return parentGrid.__class__(
         originPos=(x, y),
         columnRowNum=(6, 8),
         gridSize=(w, h),
