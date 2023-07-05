@@ -1,10 +1,10 @@
 from typesetLib.abstract.basic import BasicLayoutGraphicObject
 
 
-
 class Grid(BasicLayoutGraphicObject):
-    def __init__(self, originPos: tuple[float], columnRowNum: tuple[int], gridSize: tuple[float]=None, cellSize: tuple[float]=None,
-                  colGutter: float=10, rowGutter: float=10):
+    def __init__(self, originPos: tuple[float], columnRowNum: tuple[int], gridSize: tuple[float] = None,
+                 cellSize: tuple[float] = None,
+                 colGutter: float = 10, rowGutter: float = 10):
         self._originPos = originPos
         self.columnRowNum = columnRowNum
         self.colGutter = colGutter
@@ -13,30 +13,24 @@ class Grid(BasicLayoutGraphicObject):
         self.gridSize = None
 
         if gridSize is not None:
-                # gridSize determined cellSize
-                self.gridSize = gridSize
-                gridWidth, gridHeight = self.gridSize
-                colNum, rowNum = self.columnRowNum
+            # gridSize determined cellSize
+            self.gridSize = gridSize
+            gridWidth, gridHeight = self.gridSize
+            colNum, rowNum = self.columnRowNum
 
+            cellWidth = (gridWidth - self.colGutter * self.colGutterNum) / colNum
+            cellHeight = (gridHeight - self.rowGutter * self.rowGutterNum) / rowNum
 
-
-                cellWidth = (gridWidth - self.colGutter * self.colGutterNum) / colNum
-                cellHeight = (gridHeight - self.rowGutter * self.rowGutterNum) / rowNum
-
-                print(f"cell cellWidth {cellWidth}")
-                print(f"cell gridWidth {gridHeight}")
-                print(f"cell colNum {colNum}")
-
-                self.cellSize = (cellWidth, cellHeight)
+            self.cellSize = (cellWidth, cellHeight)
 
         if cellSize is not None:
-                # cellSize determined gridSize
-                self.cellSize = cellSize
-                cellWidth, cellHeight = self.cellSize
-                colNum, rowNum = self.columnRowNum
-                gridWidth = colNum * cellWidth + self.colGutter * self.colGutterNum
-                gridHeight = rowNum * cellHeight + self.rowGutter * self.rowGutterNum
-                self.gridSize = (gridWidth, gridHeight)
+            # cellSize determined gridSize
+            self.cellSize = cellSize
+            cellWidth, cellHeight = self.cellSize
+            colNum, rowNum = self.columnRowNum
+            gridWidth = colNum * cellWidth + self.colGutter * self.colGutterNum
+            gridHeight = rowNum * cellHeight + self.rowGutter * self.rowGutterNum
+            self.gridSize = (gridWidth, gridHeight)
 
     @property
     def colGutterNum(self):
@@ -52,10 +46,8 @@ class Grid(BasicLayoutGraphicObject):
         """
         return self.columnRowNum[1] - 1
 
-
     def setPosition(self, position):
         self._position = position
-
 
     def getOriginPos(self):
         return self._originPos
@@ -103,6 +95,7 @@ class Grid(BasicLayoutGraphicObject):
         :return:
         """
         return self.getAreaSize(*horCellNumverCellNum)
+
 
 def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCellNum: int,
                    verCellNum: int, colGutter: float, rowGutter: float) -> Grid:
