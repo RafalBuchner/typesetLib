@@ -53,6 +53,34 @@ db.rect(*grid.getAreaPosSize(2,0,4,2))
 db.saveImage(os.path.join(_outputFolder_, "grid_based_on_gridSize.pdf"))
 
 db.newDrawing()
+
+from typesetLib.abstract.grid import Grid
+db.size("A4Landscape")
+
+grid = Grid(
+    originPos=(10,10),
+    columnRowNum=(6, 8),
+    gridSize=(db.width()-20, db.height()-20),
+    cellSize=None,
+    colGutter=10,
+    rowGutter=10
+)
+
+db.fill(None)
+db.stroke(1,0,0)
+
+colNum, rowNum = grid.columnRowNum
+for x_idx in range(colNum):
+    for y_idx in range(rowNum):
+        db.rect(*grid.getAreaPosSize(x_idx,y_idx,1,1))
+db.fill(1,0,0,0.2)
+db.stroke(None)
+db.rect(*grid[0,0], *grid*(1,5))
+db.rect(*grid[2,3], *grid*(1,5))
+db.rect(*grid[2,0], *grid*(4,2))
+db.saveImage(os.path.join(_outputFolder_, "grid_mul_and_getitem_tests.pdf"))
+
+db.newDrawing()
 db.size("A4Landscape")
 grid = Grid(
     originPos=(10,10),

@@ -61,16 +61,48 @@ class Grid(BasicLayoutGraphicObject):
         return self._originPos
 
     def getAreaPosSize(self, colCellIndex, rowCellIndex, horCellNum, verCellNum):
-        cellWidth, cellHeight = (self.cellSize)
+        # cellWidth, cellHeight = self.cellSize
+        #
+        # x, y = self._originPos
+        # x += colCellIndex * cellWidth + colCellIndex * self.colGutter
+        # y += rowCellIndex * cellHeight + rowCellIndex * self.rowGutter
+        #
+        # width = horCellNum * cellWidth + self.colGutter * (horCellNum - 1)
+        # height = verCellNum * cellHeight + self.rowGutter * (verCellNum - 1)
+        x, y = self.getCellPosition(colCellIndex, rowCellIndex)
+        width, height = self.getAreaSize(horCellNum, verCellNum)
 
+        return x, y, width, height
+
+    def getCellPosition(self, colCellIndex, rowCellIndex):
+        cellWidth, cellHeight = self.cellSize
         x, y = self._originPos
         x += colCellIndex * cellWidth + colCellIndex * self.colGutter
         y += rowCellIndex * cellHeight + rowCellIndex * self.rowGutter
+        return x, y
 
+    def getAreaSize(self, horCellNum, verCellNum):
+        cellWidth, cellHeight = self.cellSize
         width = horCellNum * cellWidth + self.colGutter * (horCellNum - 1)
         height = verCellNum * cellHeight + self.rowGutter * (verCellNum - 1)
+        return width, height
 
-        return x, y, width, height
+    def __getitem__(self, colCellIndexRowCellIndex):
+        """
+        takes tuple of two integers (colCellIndex, rowCellIndex) and returns position tuple
+        :param item:
+        :return:
+        """
+        NotImplemented
+        return self.getCellPosition(*colCellIndexRowCellIndex)
+
+    def __mul__(self, horCellNumverCellNum):
+        """
+        takes tuple of two integers (horCellNum, verCellNum) and returns size tuple
+        :param other:
+        :return:
+        """
+        return self.getAreaSize(*horCellNumverCellNum)
 
 def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCellNum: int,
                    verCellNum: int, colGutter: float, rowGutter: float) -> Grid:
