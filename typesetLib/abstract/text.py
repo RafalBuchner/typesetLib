@@ -8,7 +8,8 @@ class TextObj(BasicProofObject):
     Parameters:
     - txt (str): Text of the TextObj.
     """
-    def __init__(self, txt:str=None):
+
+    def __init__(self, txt: str = None):
         super().__init__()
         self.paragraphs = None
         self._text = txt
@@ -88,6 +89,7 @@ class Paragraph(BasicProofObject):
     - index (int): The order number of Paragraph. Determined by TextObj.
     - paragraphStyle (ParagraphStyle): The style applied to the paragraph.
     """
+
     def __init__(self, textObj, txtStr, index, paragraphStyle=None):
         self._textSegments = []
         self.parent = textObj
@@ -106,7 +108,7 @@ class Paragraph(BasicProofObject):
         #  It can be hard to implement, but possible.
 
         segment = TextSegment(self, startIndex,
-                                      charRange, characterStyle)
+                              charRange, characterStyle)
 
         self._textSegments.append(segment)
         return segment

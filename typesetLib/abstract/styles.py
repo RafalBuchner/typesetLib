@@ -3,27 +3,27 @@ from typesetLib.abstract.basic import BasicProofObject
 
 class Style(BasicProofObject):
     def __init__(
-        self,
-        font=None,
-        fontSize=10,
-        fallbackFont=None,
-        fill=(0, 0, 0),
-        cmykFill=None,
-        stroke=None,
-        cmykStroke=None,
-        strokeWidth=1,
-        align=None,
-        lineHeight=None,
-        tracking=None,
-        baselineShift=None,
-        openTypeFeatures=None,
-        tabs=None,
-        language=None,
-        indent=None,
-        tailIndent=None,
-        firstLineIndent=None,
-        paragraphTopSpacing=None,
-        paragraphBottomSpacing=None,
+            self,
+            font=None,
+            fontSize=10,
+            fallbackFont=None,
+            fill=(0, 0, 0),
+            cmykFill=None,
+            stroke=None,
+            cmykStroke=None,
+            strokeWidth=1,
+            align=None,
+            lineHeight=None,
+            tracking=None,
+            baselineShift=None,
+            openTypeFeatures=None,
+            tabs=None,
+            language=None,
+            indent=None,
+            tailIndent=None,
+            firstLineIndent=None,
+            paragraphTopSpacing=None,
+            paragraphBottomSpacing=None,
     ):
         super().__init__()
         self.font = font
@@ -49,28 +49,27 @@ class Style(BasicProofObject):
 
     def asDict(self):
         return {
-                "font": self.font,
-                "fontSize": self.fontSize,
-                "fallbackFont": self.fallbackFont,
-                "fill": self.fill,
-                "cmykFill": self.cmykFill,
-                "stroke": self.stroke,
-                "cmykStroke": self.cmykStroke,
-                "strokeWidth": self.strokeWidth,
-                "align": self.align,
-                "lineHeight": self.lineHeight,
-                "tracking": self.tracking,
-                "baselineShift": self.baselineShift,
-                "openTypeFeatures": self.openTypeFeatures,
-                "tabs": self.tabs,
-                "language": self.language,
-                "indent": self.indent,
-                "tailIndent": self.tailIndent,
-                "firstLineIndent": self.firstLineIndent,
-                "paragraphTopSpacing": self.paragraphTopSpacing,
-                "paragraphBottomSpacing": self.paragraphBottomSpacing
-            }
-
+            "font": self.font,
+            "fontSize": self.fontSize,
+            "fallbackFont": self.fallbackFont,
+            "fill": self.fill,
+            "cmykFill": self.cmykFill,
+            "stroke": self.stroke,
+            "cmykStroke": self.cmykStroke,
+            "strokeWidth": self.strokeWidth,
+            "align": self.align,
+            "lineHeight": self.lineHeight,
+            "tracking": self.tracking,
+            "baselineShift": self.baselineShift,
+            "openTypeFeatures": self.openTypeFeatures,
+            "tabs": self.tabs,
+            "language": self.language,
+            "indent": self.indent,
+            "tailIndent": self.tailIndent,
+            "firstLineIndent": self.firstLineIndent,
+            "paragraphTopSpacing": self.paragraphTopSpacing,
+            "paragraphBottomSpacing": self.paragraphBottomSpacing
+        }
 
 
 class ParagraphStyle(Style):

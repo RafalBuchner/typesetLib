@@ -2,40 +2,38 @@ from typesetLib.abstract.basic import BasicLayoutGraphicObject
 
 
 class Page(BasicLayoutGraphicObject):
-	def __init__(self, size, index=0, startPgNumber=1):
-		super().__init__(size, index)
-		self.setStartingPgNumber(startPgNumber)
+    def __init__(self, size, index=0, startPgNumber=1):
+        super().__init__(size, index)
+        self.setStartingPgNumber(startPgNumber)
 
-	@property
-	def currentPgNumber(self):
-		return self.startPgNumber + self.index
+    @property
+    def currentPgNumber(self):
+        return self.startPgNumber + self.index
 
-	def pageFlip(self):
-		"""
-		means, that page has changed by 1
-		"""
-		self.index += 1
+    def pageFlip(self):
+        """
+        means, that page has changed by 1
+        """
+        self.index += 1
 
-	def resetPgNumberToStart(self):
-		self.setCurrentPgNumber(self.startPgNumber)
+    def resetPgNumberToStart(self):
+        self.setCurrentPgNumber(self.startPgNumber)
 
-	def setStartingPgNumber(self, pgNumber):
-		self.startPgNumber = pgNumber
+    def setStartingPgNumber(self, pgNumber):
+        self.startPgNumber = pgNumber
 
-	def setCurrentPgNumber(self, pgNumber):
-		self.index = pgNumber - self.startPgNumber
+    def setCurrentPgNumber(self, pgNumber):
+        self.index = pgNumber - self.startPgNumber
 
-	def setIndex(self, value):
-		self.index = value
+    def setIndex(self, value):
+        self.index = value
 
+    # not supported inherented methods:
+    def setParent(self, obj):
+        NotImplemented
 
+    def setPosition(self, obj):
+        NotImplemented
 
-	# not supported inherented methods:
-	def setParent(self, obj):
-		NotImplemented
-
-	def setPosition(self, obj):
-		NotImplemented
-
-	def getPosition(self, obj):
-		NotImplemented
+    def getPosition(self, obj):
+        NotImplemented
