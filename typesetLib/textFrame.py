@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typesetLib.abstract.story import Story
+    from typesetLib.story import Story
 
-from typesetLib.abstract.basic import BasicLayoutGraphicObject
-from typesetLib.abstract.page import Page
+from typesetLib.basic import BasicLayoutGraphicObject
+from typesetLib.page import Page
 
 
 class TextFrame(BasicLayoutGraphicObject):

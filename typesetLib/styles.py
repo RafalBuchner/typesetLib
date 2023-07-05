@@ -1,4 +1,4 @@
-from typesetLib.abstract.basic import BasicProofObject
+from typesetLib.basic import BasicProofObject
 
 
 class Style(BasicProofObject):

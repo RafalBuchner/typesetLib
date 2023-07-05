@@ -1,4 +1,4 @@
-from typesetLib.abstract.basic import BasicLayoutGraphicObject
+from typesetLib.basic import BasicLayoutGraphicObject
 
 
 class Page(BasicLayoutGraphicObject):

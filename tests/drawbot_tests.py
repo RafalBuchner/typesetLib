@@ -26,7 +26,7 @@ def exec_cmd(command, silent=False):
 ###
 
 # Grid basic tests
-from typesetLib.abstract.grid import Grid
+from typesetLib.grid import Grid
 db.size("A4Landscape")
 
 grid = Grid(
@@ -54,7 +54,7 @@ db.saveImage(os.path.join(_outputFolder_, "grid_based_on_gridSize.pdf"))
 
 db.newDrawing()
 
-from typesetLib.abstract.grid import Grid
+from typesetLib.grid import Grid
 db.size("A4Landscape")
 
 grid = Grid(
@@ -106,7 +106,7 @@ db.rect(*grid.getAreaPosSize(2,0,4,2))
 
 db.saveImage(os.path.join(_outputFolder_, "grid_based_on_cellSize.pdf"))
 
-from typesetLib.abstract.grid import makeNestedGrid
+from typesetLib.grid import makeNestedGrid
 
 db.newDrawing()
 db.size("A4Landscape")
