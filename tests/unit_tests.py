@@ -8,8 +8,8 @@ article = open("article.txt", "r").read()
 
 class AbstractObjectsTest(unittest.TestCase):
     def test_textObj(self):
-        from typesetLib.abstract.text import TextObj
-        from typesetLib.abstract.styles import CharacterStyle
+        from typesetLib.text import TextObj
+        from typesetLib.styles import CharacterStyle
         txt = TextObj()
         self.assertIsNone(txt.getText())
         self.assertIsNone(txt.paragraphs)
@@ -31,7 +31,7 @@ class AbstractObjectsTest(unittest.TestCase):
         self.assertEqual(len(textMap), len(styleMap))
 
     def test_Page(self):
-        from typesetLib.abstract.page import Page
+        from typesetLib.page import Page
         page = Page((100,200))
         self.assertEqual(page.currentPgNumber, 1)
         self.assertEqual(page.index, 0)
@@ -57,10 +57,10 @@ class AbstractObjectsTest(unittest.TestCase):
 
 
     def test_basicLayouting(self):
-        from typesetLib.abstract.text import TextObj
-        from typesetLib.abstract.story import Story
-        from typesetLib.abstract.page import Page
-        from typesetLib.abstract.textFrame import TextFrame
+        from typesetLib.text import TextObj
+        from typesetLib.story import Story
+        from typesetLib.page import Page
+        from typesetLib.textFrame import TextFrame
 
         txt = TextObj()
         txt.setText(article)
