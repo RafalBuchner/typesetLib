@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typesetLib.story import Story
 
-from typesetLib.basic import BasicLayoutGraphicObject
+from typesetLib.basic import BasicLayoutGraphicObject, BasicDrawbotObject
 from typesetLib.page import Page
 
 
@@ -57,3 +57,10 @@ class TextFrame(BasicLayoutGraphicObject):
                 parentPage = currentObj
                 break
         return parentPage
+
+class DBTextFrame(TextFrame, BasicDrawbotObject):
+    def setPosition(self, originPos):
+        self._originPos = self.translateOriginOfPosition(originPos)
+
+    def draw(self):
+        NotImplemented
