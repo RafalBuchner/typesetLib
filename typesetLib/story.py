@@ -5,7 +5,7 @@ if TYPE_CHECKING:
     from typesetLib.text import TextObj
     from typesetLib.textFrame import TextFrame
 
-from typesetLib.basic import BasicProofObject
+from typesetLib.basic import BasicProofObject, BasicDrawbotObject
 
 
 class Story(BasicProofObject):
@@ -13,7 +13,12 @@ class Story(BasicProofObject):
         self.textObj = textObj
         self.textBoxes = []
 
-        self.textReminds: TextObj
+        self.textLeft: TextObj
 
     def addTextBox(self, layoutTextBox: TextFrame):
         self.textBoxes.append(layoutTextBox)
+
+
+class DBStory(Story):
+    def draw(self):
+        NotImplemented
