@@ -1,11 +1,25 @@
-from typesetLib.basic import BasicLayoutGraphicObject
+from __future__ import annotations
 
+from typesetLib.basic import BasicLayoutGraphicObject, BasicDrawbotObject
+
+def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCellNum: int,
+                   verCellNum: int, colGutter: float, rowGutter: float) -> Grid:
+    x, y, w, h = parentGrid.getAreaPosSize(colCellIndex, rowCellIndex, horCellNum, verCellNum)
+
+    return parentGrid.__class__(
+        originPos=(x, y),
+        columnRowNum=(6, 8),
+        gridSize=(w, h),
+        cellSize=None,
+        colGutter=colGutter,
+        rowGutter=rowGutter
+    )
 
 class Grid(BasicLayoutGraphicObject):
     def __init__(self, originPos: tuple[float], columnRowNum: tuple[int], gridSize: tuple[float] = None,
                  cellSize: tuple[float] = None,
                  colGutter: float = 10, rowGutter: float = 10):
-        self._originPos = originPos
+        self.setOriginPos(originPos)
         self.columnRowNum = columnRowNum
         self.colGutter = colGutter
         self.rowGutter = rowGutter
@@ -46,8 +60,8 @@ class Grid(BasicLayoutGraphicObject):
         """
         return self.columnRowNum[1] - 1
 
-    def setPosition(self, position):
-        self._position = position
+    def setOriginPos(self, originPos):
+        self._originPos = originPos
 
     def getOriginPos(self):
         return self._originPos
@@ -89,15 +103,13 @@ class Grid(BasicLayoutGraphicObject):
         return self.getAreaSize(*horCellNumverCellNum)
 
 
-def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCellNum: int,
-                   verCellNum: int, colGutter: float, rowGutter: float) -> Grid:
-    x, y, w, h = parentGrid.getAreaPosSize(colCellIndex, rowCellIndex, horCellNum, verCellNum)
+class DBGrid(Grid, BasicDrawbotObject):
+    def setOriginPos(self, originPos):
+        self._originPos = self.translateOriginOfPosition(originPos)
 
-    return parentGrid.__class__(
-        originPos=(x, y),
-        columnRowNum=(6, 8),
-        gridSize=(w, h),
-        cellSize=None,
-        colGutter=colGutter,
-        rowGutter=rowGutter
-    )
+    def getCellPosition(self, colCellIndex, rowCellIndex):
+        return self.translateOriginOfPosition( super().getCellPosition(colCellIndex, rowCellIndex) )
+
+    # def getAreaPosSize(self, colCellIndex, rowCellIndex):
+    #     return self.translateOriginOfPosition( super().getAreaPosSize(colCellIndex, rowCellIndex) )
+

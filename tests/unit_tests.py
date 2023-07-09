@@ -32,7 +32,7 @@ class AbstractObjectsTest(unittest.TestCase):
 
     def test_Page(self):
         from typesetLib.page import Page
-        page = Page((100,200))
+        page = Page((100, 200))
         self.assertEqual(page.currentPgNumber, 1)
         self.assertEqual(page.index, 0)
 
@@ -54,7 +54,6 @@ class AbstractObjectsTest(unittest.TestCase):
         page.setIndex(11)
         self.assertEqual(page.currentPgNumber, 15)
         self.assertEqual(page.index, 11)
-
 
     def test_basicLayouting(self):
         from typesetLib.text import TextObj
@@ -82,16 +81,40 @@ class AbstractObjectsTest(unittest.TestCase):
         from typesetLib.basic import BasicDrawbotObject
 
         db_obj = BasicDrawbotObject()
-        db_obj.setCanvasSize((1000,1000))
+        db_obj.setCanvasSize((1000, 1000))
 
         # position only
-        db_x, db_y = db_obj.translateOriginOfPosition((0,50))
+        db_x, db_y = db_obj.translateOriginOfPosition((0, 50))
         self.assertEqual(db_y, 950)
         # position + size
         db_x, db_y, db_w, db_h = db_obj.translateOriginOfPosition((0, 50, 0, 70))
         self.assertEqual(db_y, 880)
 
+    def test_GridObjects(self):
+        from typesetLib.grid import Grid, DBGrid
 
+        grid = Grid(
+            originPos=(10, 10),
+            columnRowNum=(6, 8),
+            gridSize=None,
+            cellSize=(20, 50),
+            colGutter=10,
+            rowGutter=10
+        )
+        x1, y1 = grid.getCellPosition(2, 2)
+        x2, y2, w2, h2 = grid.getAreaPosSize(2, 2, 5, 6)
+
+        db_grid = DBGrid(
+            originPos=(10, 10),
+            columnRowNum=(6, 8),
+            gridSize=None,
+            cellSize=(20, 50),
+            colGutter=10,
+            rowGutter=10
+        )
+        x3, y3 = db_grid.getCellPosition(2, 2)
+        x4, y4, w4, h4 = db_grid.getAreaPosSize(2, 2, 5, 6)
+        self.assertEqual(y1, y2)
 
 
 if __name__ == "__main__":
