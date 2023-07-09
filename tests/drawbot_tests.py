@@ -46,7 +46,7 @@ class DrawbotObjectTest(unittest.TestCase):
         db.size("A4Landscape")
 
         grid = Grid(
-            originPos=(10, 10),
+            position=(10, 10),
             columnRowNum=(6, 8),
             gridSize=(db.width() - 20, db.height() - 20),
             cellSize=None,
@@ -73,7 +73,7 @@ class DrawbotObjectTest(unittest.TestCase):
         db.newDrawing()
         db.size("A4Landscape")
         grid = Grid(
-            originPos=(10, 10),
+            position=(10, 10),
             columnRowNum=(6, 8),
             gridSize=None,
             cellSize=(20, 50),
@@ -104,7 +104,7 @@ class DrawbotObjectTest(unittest.TestCase):
         db.newDrawing()
         db.size("A4Landscape")
         grid = Grid(
-            originPos=(10, 10),
+            position=(10, 10),
             columnRowNum=(6, 8),
             gridSize=(db.width() - 20, db.height() - 20),
             cellSize=None,

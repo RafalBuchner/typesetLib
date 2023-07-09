@@ -7,7 +7,7 @@ def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCe
     x, y, w, h = parentGrid.getAreaPosSize(colCellIndex, rowCellIndex, horCellNum, verCellNum)
 
     return parentGrid.__class__(
-        originPos=(x, y),
+        position=(x, y),
         columnRowNum=(6, 8),
         gridSize=(w, h),
         cellSize=None,
@@ -16,10 +16,10 @@ def makeNestedGrid(parentGrid: Grid, colCellIndex: int, rowCellIndex: int, horCe
     )
 
 class Grid(BasicLayoutGraphicObject):
-    def __init__(self, originPos: tuple[float], columnRowNum: tuple[int], gridSize: tuple[float] = None,
+    def __init__(self, position: tuple[float], columnRowNum: tuple[int], gridSize: tuple[float] = None,
                  cellSize: tuple[float] = None,
                  colGutter: float = 10, rowGutter: float = 10):
-        self.setOriginPos(originPos)
+
         self.columnRowNum = columnRowNum
         self.colGutter = colGutter
         self.rowGutter = rowGutter
@@ -46,6 +46,8 @@ class Grid(BasicLayoutGraphicObject):
             gridHeight = rowNum * cellHeight + self.rowGutter * self.rowGutterNum
             self.gridSize = (gridWidth, gridHeight)
 
+        super().__init__(self.gridSize, index=None, position=position, verticalAlignment=None)
+
     @property
     def colGutterNum(self):
         """
@@ -60,11 +62,6 @@ class Grid(BasicLayoutGraphicObject):
         """
         return self.columnRowNum[1] - 1
 
-    def setOriginPos(self, originPos):
-        self._originPos = originPos
-
-    def getOriginPos(self):
-        return self._originPos
 
     def getAreaPosSize(self, colCellIndex, rowCellIndex, horCellNum, verCellNum):
         x, y = self.getCellPosition(colCellIndex, rowCellIndex)
@@ -74,7 +71,7 @@ class Grid(BasicLayoutGraphicObject):
 
     def getCellPosition(self, colCellIndex, rowCellIndex):
         cellWidth, cellHeight = self.cellSize
-        x, y = self._originPos
+        x, y = self._position
         x += colCellIndex * cellWidth + colCellIndex * self.colGutter
         y += rowCellIndex * cellHeight + rowCellIndex * self.rowGutter
         return x, y
@@ -104,8 +101,8 @@ class Grid(BasicLayoutGraphicObject):
 
 
 class DBGrid(Grid, BasicDrawbotObject):
-    def setOriginPos(self, originPos):
-        self._originPos = self.translateOriginOfPosition(originPos)
+    def setPosition(self, position):
+        self._position = self.translateOriginOfPosition(position)
 
     def getCellPosition(self, colCellIndex, rowCellIndex):
         return self.translateOriginOfPosition( super().getCellPosition(colCellIndex, rowCellIndex) )

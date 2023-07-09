@@ -33,10 +33,10 @@ class BasicGraphicObject(BasicTextFlowObject):
         return self.width, self.height
 
     def setPosition(self, position):
-        self.x, self.y = position
+        self._position = position
 
     def getPosition(self):
-        return self.x, self.y
+        return self._position
 
     def setVerticalAlignment(self, verticalAlignment):
         NotImplemented
